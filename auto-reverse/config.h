@@ -19,4 +19,21 @@
 
 #define DEBUG false
 
+////////////////////////////////////////////////////////////////////////////////
+//
+//    Optional 
+//
+
+
+// Temperature sensor
+#define HAS_TEMPERTURE true
+
+#define TEMPERTURE_SCK_PIN 10
+#define TEMPERTURE_CS_PIN 9
+#define TEMPERTURE_SO 8
+
+#define TEMPERTURE_INTERVAL 1000   // Senor read interval, MAX6675 wants it over 1000
+#define TEMPERTURE_MAX 40           // Max. motor temperature, in C
+
+
 #endif

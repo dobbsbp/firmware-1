@@ -3,6 +3,10 @@
 #include "proximity.h"
 #include "switch.h"
 
+#ifdef HAS_TEMPERTURE
+#include "temperature.h"
+#endif
+
 unsigned long logTS = 0;      // TS to dump debug messages every 5 secs
 
 unsigned long startTS = 0;    // TS for last vfd started
@@ -12,24 +16,30 @@ int mode = 0;                 // see enums.h::MODE
 
 int jamming = 0;              // jamming counter
 
+
 void setup() {
   if (DEBUG) {
     Serial.begin(19200);
   }
 
+  Serial.begin(19200);
+
   vfd_setup();
   proximity_setup();
   switch_setup();
-
   logTS = millis();
-}
 
+}
 
 void loop() {
 
   switch_loop();
   proximity_loop();
 
+
+#ifdef HAS_TEMPERTURE
+  temperature_loop();
+#endif
 
   if (DEBUG) {
     if (millis() - logTS > 5000) {
@@ -39,6 +49,8 @@ void loop() {
       Serial.println(data);
     }
   }
+
+
 
   if (switch_pos == FORWARD) {
 
@@ -120,5 +132,5 @@ void loop() {
         break;
       }
   }
-  delay(100);
+  delay(1000);
 }
