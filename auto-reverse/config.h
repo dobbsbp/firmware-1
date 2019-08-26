@@ -7,8 +7,8 @@
 #define PROXIMITY_INPUT 7       // Proximity Sensor Pin (usually the black)
 #define PROXIMITY_TIMEOUT 3000  // Max. delta time between the sensor's on/off. This is used to recognize a jamming 
 
-#define RELAY_ON 0              // The relay bank's on value (normally closed) 
-#define RELAY_OFF 255           // The relay bank's on value (normally closed) 
+#define RELAY_ON 0              // The relay bank's on value (eg: normally closed) 
+#define RELAY_OFF 255           // The relay bank's off value (eg: normally closed) 
 
 #define DIR_SWITCH_UP 3         // The 3 position's up output (digital in)
 #define DIR_SWITCH_DOWN 4       // The 3 position's down output (digital in)
