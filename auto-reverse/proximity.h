@@ -9,8 +9,6 @@
 
 #include <Bounce2.h>
 #include "config.h"
-#include "log.h"
-
 
 unsigned long SENSOR_HIGH_TS = 0;   // Last HIGH TS
 unsigned long SENSOR_LOW_TS = 0;    // Last LOW TS

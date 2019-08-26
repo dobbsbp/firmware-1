@@ -6,6 +6,15 @@ void fwd(bool on);
 
 int vfd_dir = 0;
 
+void stop();
+
+void vfd_setup()
+{
+  pinMode(FWD_PIN, OUTPUT);
+  pinMode(REV_PIN, OUTPUT);
+  stop();
+}
+
 void fwd(bool on)
 {
   if (on)
@@ -39,11 +48,4 @@ void stop()
   rev(false);
   fwd(false);
   vfd_dir = DIRECTION::STOP;
-}
-
-void vfd_setup()
-{
-  pinMode(FWD_PIN, OUTPUT);
-  pinMode(REV_PIN, OUTPUT);
-  stop();
 }

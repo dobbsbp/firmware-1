@@ -7,6 +7,7 @@ enum DIRECTION : unsigned char
   STOP = 0,
   REVERSE = 2
 };
+
 enum MODE : unsigned char
 {
   HALT = 0,
@@ -17,4 +18,5 @@ enum MODE : unsigned char
   JAMMING = 5,
   FATAL = 6
 };
+
 #endif

@@ -3,7 +3,7 @@
 #include "proximity.h"
 #include "switch.h"
 
-unsigned long logTS = 0;      // TS to track and dump debu messages every 5 secs
+unsigned long logTS = 0;      // TS to dump debug messages every 5 secs
 
 unsigned long startTS = 0;    // TS for last vfd started
 unsigned long reverseTS = 0;  // TS for last vfd reversing
