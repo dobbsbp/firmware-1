@@ -21,7 +21,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 //
-//    Optional 
+//    Optional
 //
 
 
@@ -35,5 +35,8 @@
 #define TEMPERTURE_INTERVAL 1000   // Senor read interval, MAX6675 wants it over 1000
 #define TEMPERTURE_MAX 40           // Max. motor temperature, in C
 
+// Alarm sound
+#define ALARM_SOUND TRUE
+#define ALARM_SOUND_PIN 11
 
 #endif

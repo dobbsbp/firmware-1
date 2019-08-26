@@ -19,8 +19,12 @@ void temperature_loop() {
     temperature = ktc.readCelsius();
     Serial.println(temperature);
   }
+
 }
 
+bool temperatureOk() {
+  return temperature < TEMPERTURE_MAX;
+}
 
 #endif
 

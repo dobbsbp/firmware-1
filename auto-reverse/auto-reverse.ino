@@ -3,8 +3,13 @@
 #include "proximity.h"
 #include "switch.h"
 
+
 #ifdef HAS_TEMPERTURE
 #include "temperature.h"
+#endif
+
+#ifdef ALARM_SOUND
+#include "alarm.h"
 #endif
 
 unsigned long logTS = 0;      // TS to dump debug messages every 5 secs
@@ -31,14 +36,26 @@ void setup() {
 
 }
 
+void onFatal() {
+
+#ifdef ALARM_SOUND
+  alarm();
+#endif
+
+}
+
 void loop() {
 
   switch_loop();
   proximity_loop();
 
-
 #ifdef HAS_TEMPERTURE
   temperature_loop();
+  if (!temperatureOk()) {
+    mode = FATAL;
+    onFatal();
+    return;
+  }
 #endif
 
   if (DEBUG) {
@@ -89,6 +106,7 @@ void loop() {
         mode = FATAL;
         stop();
         proximity_reset();
+        onFatal();
         return;
       }
 
@@ -107,6 +125,13 @@ void loop() {
         moving = false;
       }
     }
+  }
+
+
+  if (mode == FATAL) {
+#ifdef ALARM_SOUND
+    alarm();
+#endif
   }
 
   if ((mode == JAMMING || mode == FATAL || mode == REVERSING)) {
