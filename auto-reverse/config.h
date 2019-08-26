@@ -24,7 +24,6 @@
 //    Optional
 //
 
-
 // Temperature sensor
 #define HAS_TEMPERTURE true
 

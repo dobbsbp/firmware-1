@@ -49,6 +49,7 @@ void loop() {
   switch_loop();
   proximity_loop();
 
+
 #ifdef HAS_TEMPERTURE
   temperature_loop();
   if (!temperatureOk()) {
@@ -57,6 +58,7 @@ void loop() {
     return;
   }
 #endif
+
 
   if (DEBUG) {
     if (millis() - logTS > 5000) {
@@ -127,12 +129,11 @@ void loop() {
     }
   }
 
-
-  if (mode == FATAL) {
 #ifdef ALARM_SOUND
+  if (mode == FATAL) {
     alarm();
-#endif
   }
+#endif
 
   if ((mode == JAMMING || mode == FATAL || mode == REVERSING)) {
     if (switch_pos != STOP) {
@@ -157,5 +158,5 @@ void loop() {
         break;
       }
   }
-  delay(1000);
+  delay(100);
 }
