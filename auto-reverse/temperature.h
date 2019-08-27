@@ -15,7 +15,6 @@ void temperature_loop() {
     temperature_TS = millis();
     temperature = ktc.readCelsius();
   }
-
 }
 
 bool temperatureOk() {

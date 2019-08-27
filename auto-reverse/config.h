@@ -5,7 +5,7 @@
 #define REV_PIN A3              // VFD REV Pin
 
 #define PROXIMITY_INPUT 7       // Proximity Sensor Pin (usually the black)
-#define PROXIMITY_TIMEOUT 3000  // Max. delta time between the sensor's on/off. This is used to recognize a jamming 
+#define PROXIMITY_TIMEOUT 3000  // Max. delta time between the sensor's on/off. This is used to recognize a jamming.
 
 #define RELAY_ON 0              // The relay bank's on value (eg: normally closed) 
 #define RELAY_OFF 255           // The relay bank's off value (eg: normally closed) 
@@ -25,7 +25,7 @@
 //
 
 // Temperature sensor
-#define HAS_TEMPERTURE true
+#define HAS_TEMPERTURE
 
 #define TEMPERTURE_SCK_PIN 10
 #define TEMPERTURE_CS_PIN 9
@@ -35,7 +35,7 @@
 #define TEMPERTURE_MAX 60           // Max. motor temperature, in C
 
 // Alarm sound
-#define ALARM_SOUND TRUE
+#define ALARM_SOUND
 #define ALARM_SOUND_PIN 11
 
 #endif
