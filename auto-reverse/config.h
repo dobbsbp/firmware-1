@@ -4,9 +4,6 @@
 #define FWD_PIN A2              // VFD FWD Pin
 #define REV_PIN A3              // VFD REV Pin
 
-#define PROXIMITY_INPUT 7       // Proximity Sensor Pin (usually the black)
-#define PROXIMITY_TIMEOUT 3000  // Max. delta time between the sensor's on/off. This is used to recognize a jamming.
-
 #define RELAY_ON 0              // The relay bank's on value (eg: normally closed) 
 #define RELAY_OFF 255           // The relay bank's off value (eg: normally closed) 
 
@@ -22,8 +19,14 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 //
-//    Optional
+//    Optional : you need to activate at least one sensor, HALL or/and PROXIMITY
 //
+
+// Proximity sensor - uncomment to activate
+#define HAS_PROXIMITY
+#define PROXIMITY_INPUT 7       // Proximity Sensor Pin (usually the black)
+#define PROXIMITY_TIMEOUT 3000  // Max. delta time between the sensor's on/off. This is used to recognize a jamming.
+
 
 // Temperature sensor - uncomment to activate
 // #define HAS_TEMPERTURE
@@ -39,9 +42,7 @@
 #define ALARM_SOUND_PIN 11
 
 
-// Experimental :
-
-// Hall Sensor - uncomment to activate
+// Hall Sensor (Experimental)- uncomment to activate
 // #define HAS_HALL
 #define HALL_INTERVAL 500           // hall sensor read interval
 #define HALL_PIN A0                 // this pin has a hall sensor connected to it that measures the output current to the motor

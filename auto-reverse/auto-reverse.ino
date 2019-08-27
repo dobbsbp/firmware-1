@@ -16,15 +16,18 @@
 #include "hall.h"
 #endif
 
+#ifdef HAS_PROXIMITY
+#include "proximity.h"
+#endif
+
+
 unsigned long logTS = 0;      // TS to dump debug messages every 5 secs
 
 unsigned long startTS = 0;    // TS for last vfd started
 unsigned long reverseTS = 0;  // TS for last vfd reversing
 
 int mode = 0;                 // see enums.h::MODE
-
 int jamming = 0;              // jamming counter
-
 
 
 // our main 'is shredding function', utilizing different sensors
@@ -32,10 +35,11 @@ bool isShredding() {
 
   bool ret = true;
 
+#ifdef HAS_PROXIMITY
   if (!proximityOk()) {
     return false;
   }
-
+#endif
 
 #ifdef HAS_HALL
   ret = hallOk();
@@ -50,12 +54,14 @@ void setup() {
     Serial.begin(19200);
   }
 
-  Serial.begin(19200);
-
   vfd_setup();
-  proximity_setup();
   switch_setup();
   logTS = millis();
+
+#ifdef HAS_PROXIMTY
+  proximity_setup();
+#endif
+
 #ifdef HAS_HALL
   hall_setup();
 #endif
@@ -154,7 +160,11 @@ void loop() {
         stop();
         startTS = millis();
         mode = STARTING;
+
+#ifdef HAS_PROXIMTY
         moving = false;
+#endif
+
       }
     }
   }
