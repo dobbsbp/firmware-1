@@ -22,10 +22,10 @@ Bounce debouncerDown = Bounce();
 
 void switch_setup()
 {
-  debouncerUp.attach(DIR_SWITCH_UP, INPUT_PULLUP);
+  debouncerUp.attach(DIR_SWITCH_UP_PIN, INPUT_PULLUP);
   debouncerUp.interval(25);
 
-  debouncerDown.attach(DIR_SWITCH_DOWN, INPUT_PULLUP);
+  debouncerDown.attach(DIR_SWITCH_DOWN_PIN, INPUT_PULLUP);
   debouncerDown.interval(25);
 }
 

@@ -4,7 +4,7 @@
 #ifdef HAS_TEMPERTURE
 #include <max6675.h>
 
-MAX6675 ktc(TEMPERTURE_SCK_PIN, TEMPERTURE_CS_PIN, TEMPERTURE_SO);
+MAX6675 ktc(TEMPERTURE_SCK_PIN, TEMPERTURE_CS_PIN, TEMPERTURE_SO_PIN);
 
 int temperature = 0;
 unsigned long temperature_TS = 0;

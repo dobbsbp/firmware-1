@@ -7,8 +7,8 @@
 #define RELAY_ON 0              // The relay bank's on value (eg: normally closed) 
 #define RELAY_OFF 255           // The relay bank's off value (eg: normally closed) 
 
-#define DIR_SWITCH_UP 3         // The 3 position's up output (digital in)
-#define DIR_SWITCH_DOWN 4       // The 3 position's down output (digital in)
+#define DIR_SWITCH_UP_PIN 3         // The 3 position's up output (digital in)
+#define DIR_SWITCH_DOWN_PIN 4       // The 3 position's down output (digital in)
 
 #define STARTING_TIMEOUT 2000   // Threshold, time needed to startup motor
 #define REVERSING_TIMEOUT 2000  // Threshold, time needed to reverse motor
@@ -24,7 +24,7 @@
 
 // Proximity sensor - uncomment to activate
 #define HAS_PROXIMITY
-#define PROXIMITY_INPUT 7       // Proximity Sensor Pin (usually the black)
+#define PROXIMITY_PIN 7       // Proximity Sensor Pin (usually the black)
 #define PROXIMITY_TIMEOUT 3000  // Max. delta time between the sensor's on/off. This is used to recognize a jamming.
 
 
@@ -32,7 +32,7 @@
 // #define HAS_TEMPERTURE
 #define TEMPERTURE_SCK_PIN 10
 #define TEMPERTURE_CS_PIN 9
-#define TEMPERTURE_SO 8
+#define TEMPERTURE_SO_PIN 8
 
 #define TEMPERTURE_INTERVAL 1000    // Senor read interval, MAX6675 wants it over 1000
 #define TEMPERTURE_MAX 60           // Max. motor temperature, in C

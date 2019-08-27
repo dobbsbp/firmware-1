@@ -27,7 +27,7 @@ void proximity_setup()
   SENSOR_HIGH_TS = now;
   SENSOR_DT = now;
 
-  proxDebouncer.attach(PROXIMITY_INPUT, INPUT_PULLUP);
+  proxDebouncer.attach(PROXIMITY_PIN, INPUT_PULLUP);
   proxDebouncer.interval(25);
 
   moving = 0;
