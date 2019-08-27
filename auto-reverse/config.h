@@ -17,7 +17,7 @@
 #define REVERSING_TIMEOUT 2000  // Threshold, time needed to reverse motor
 #define MAX_REVERSE_TRIALS 2    // Max. trials to reverse before aborting
 
-#define DEBUG true
+#define DEBUG false
 #define DEBUG_INTERVAL 2000
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -35,14 +35,14 @@
 #define TEMPERTURE_MAX 60           // Max. motor temperature, in C
 
 // Alarm sound - uncomment to activate
-#define ALARM_SOUND
+// #define ALARM_SOUND
 #define ALARM_SOUND_PIN 11
 
 
 // Experimental :
 
 // Hall Sensor - uncomment to activate
-#define HAS_HALL
+// #define HAS_HALL
 #define HALL_INTERVAL 500           // hall sensor read interval
 #define HALL_PIN A0                 // this pin has a hall sensor connected to it that measures the output current to the motor
 #define MAX_AMPS 650                // this is the value over which the hall sensor signal will register as a jam
