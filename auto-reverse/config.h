@@ -17,25 +17,35 @@
 #define REVERSING_TIMEOUT 2000  // Threshold, time needed to reverse motor
 #define MAX_REVERSE_TRIALS 2    // Max. trials to reverse before aborting
 
-#define DEBUG false
+#define DEBUG true
+#define DEBUG_INTERVAL 2000
 
 ////////////////////////////////////////////////////////////////////////////////
 //
 //    Optional
 //
 
-// Temperature sensor
-#define HAS_TEMPERTURE
-
+// Temperature sensor - uncomment to activate
+// #define HAS_TEMPERTURE
 #define TEMPERTURE_SCK_PIN 10
 #define TEMPERTURE_CS_PIN 9
 #define TEMPERTURE_SO 8
 
-#define TEMPERTURE_INTERVAL 1000   // Senor read interval, MAX6675 wants it over 1000
+#define TEMPERTURE_INTERVAL 1000    // Senor read interval, MAX6675 wants it over 1000
 #define TEMPERTURE_MAX 60           // Max. motor temperature, in C
 
-// Alarm sound
+// Alarm sound - uncomment to activate
 #define ALARM_SOUND
 #define ALARM_SOUND_PIN 11
+
+
+// Experimental :
+
+// Hall Sensor - uncomment to activate
+#define HAS_HALL
+#define HALL_INTERVAL 500           // hall sensor read interval
+#define HALL_PIN A0                 // this pin has a hall sensor connected to it that measures the output current to the motor
+#define MAX_AMPS 650                // this is the value over which the hall sensor signal will register as a jam
+
 
 #endif

@@ -79,4 +79,8 @@ void proximity_loop()
   }
 }
 
+bool proximityOk() {
+  return moving;
+}
+
 #endif

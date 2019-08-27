@@ -12,6 +12,10 @@
 #include "alarm.h"
 #endif
 
+#ifdef HAS_HALL
+#include "hall.h"
+#endif
+
 unsigned long logTS = 0;      // TS to dump debug messages every 5 secs
 
 unsigned long startTS = 0;    // TS for last vfd started
@@ -20,6 +24,25 @@ unsigned long reverseTS = 0;  // TS for last vfd reversing
 int mode = 0;                 // see enums.h::MODE
 
 int jamming = 0;              // jamming counter
+
+
+
+// our main 'is shredding function', utilizing different sensors
+bool isShredding() {
+
+  bool ret = true;
+
+  if (!proximityOk()) {
+    return false;
+  }
+
+
+#ifdef HAS_HALL
+  ret = hallOk();
+#endif
+
+  return ret;
+}
 
 
 void setup() {
@@ -33,6 +56,9 @@ void setup() {
   proximity_setup();
   switch_setup();
   logTS = millis();
+#ifdef HAS_HALL
+  hall_setup();
+#endif
 
 }
 
@@ -49,6 +75,10 @@ void loop() {
   switch_loop();
   proximity_loop();
 
+#ifdef HAS_HALL
+  hall_loop();
+#endif
+
 
 #ifdef HAS_TEMPERTURE
   temperature_loop();
@@ -61,9 +91,9 @@ void loop() {
 
 
   if (DEBUG) {
-    if (millis() - logTS > 5000) {
+    if (millis() - logTS > DEBUG_INTERVAL) {
       logTS = millis();
-      char data[100];
+      char data[124];
       sprintf(data, "DEBUG 3POS : %d || MOVING : %d || VFD : %d || last dir switch : %d | mode = %d | sensor = %lu | jamming=%d" , switch_pos, moving, vfd_dir, last_switch, mode, SENSOR_DT, jamming);
       Serial.println(data);
     }
@@ -74,7 +104,7 @@ void loop() {
   if (switch_pos == FORWARD) {
 
     if (last_switch == STOP) {
-      if (!moving && mode == HALT) {
+      if (!isShredding() && mode == HALT) {
         startTS = millis();
         mode = STARTING;
       }
@@ -82,7 +112,7 @@ void loop() {
 
     if (mode == STARTING) {
       if (millis() - startTS > STARTING_TIMEOUT) {
-        if (moving) {
+        if (isShredding()) {
           mode = SHREDDING;
         } else {
           mode = JAMMING;
@@ -93,7 +123,7 @@ void loop() {
     }
 
     if (mode == SHREDDING) {
-      if (!moving) {
+      if (!isShredding()) {
         mode = JAMMING;
         stop();
         proximity_reset();
