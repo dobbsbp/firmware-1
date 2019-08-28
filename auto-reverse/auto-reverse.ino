@@ -5,19 +5,19 @@
 
 
 #ifdef HAS_TEMPERTURE
-#include "temperature.h"
+    #include "temperature.h"
 #endif
 
 #ifdef ALARM_SOUND
-#include "alarm.h"
+  #include "alarm.h"
 #endif
 
 #ifdef HAS_HALL
-#include "hall.h"
+  #include "hall.h"
 #endif
 
 #ifdef HAS_PROXIMITY
-#include "proximity.h"
+  #include "proximity.h"
 #endif
 
 
@@ -35,15 +35,15 @@ bool isShredding() {
 
   bool ret = true;
 
-#ifdef HAS_PROXIMITY
-  if (!proximityOk()) {
-    return false;
-  }
-#endif
-
-#ifdef HAS_HALL
-  ret = hallOk();
-#endif
+  #ifdef HAS_PROXIMITY
+    if (!proximityOk()) {
+      return false;
+    }
+  #endif
+  
+  #ifdef HAS_HALL
+    ret = hallOk();
+  #endif
 
   return ret;
 }
@@ -58,21 +58,21 @@ void setup() {
   switch_setup();
   logTS = millis();
 
-#ifdef HAS_PROXIMTY
-  proximity_setup();
-#endif
-
-#ifdef HAS_HALL
-  hall_setup();
-#endif
+  #ifdef HAS_PROXIMTY
+    proximity_setup();
+  #endif
+  
+  #ifdef HAS_HALL
+    hall_setup();
+  #endif
 
 }
 
 void onFatal() {
 
-#ifdef ALARM_SOUND
-  alarm();
-#endif
+  #ifdef ALARM_SOUND
+    alarm();
+  #endif
 
 }
 
@@ -81,19 +81,19 @@ void loop() {
   switch_loop();
   proximity_loop();
 
-#ifdef HAS_HALL
-  hall_loop();
-#endif
+  #ifdef HAS_HALL
+    hall_loop();
+  #endif
 
 
-#ifdef HAS_TEMPERTURE
-  temperature_loop();
-  if (!temperatureOk()) {
-    mode = FATAL;
-    onFatal();
-    return;
-  }
-#endif
+  #ifdef HAS_TEMPERTURE
+    temperature_loop();
+    if (!temperatureOk()) {
+      mode = FATAL;
+      onFatal();
+      return;
+    }
+  #endif
 
 
   if (DEBUG) {
@@ -132,7 +132,9 @@ void loop() {
       if (!isShredding()) {
         mode = JAMMING;
         stop();
-        proximity_reset();
+        #ifdef HAS_PROXIMTY
+          proximity_reset();
+        #endif
         return;
       } else {
         jamming = 0;
@@ -143,7 +145,11 @@ void loop() {
       if (jamming >= MAX_REVERSE_TRIALS) {
         mode = FATAL;
         stop();
-        proximity_reset();
+        
+        #ifdef HAS_PROXIMTY
+              moving = false;
+        #endif
+        
         onFatal();
         return;
       }
@@ -161,19 +167,19 @@ void loop() {
         startTS = millis();
         mode = STARTING;
 
-#ifdef HAS_PROXIMTY
+      #ifdef HAS_PROXIMTY
         moving = false;
-#endif
+      #endif
 
       }
     }
   }
 
-#ifdef ALARM_SOUND
-  if (mode == FATAL) {
-    alarm();
-  }
-#endif
+  #ifdef ALARM_SOUND
+    if (mode == FATAL) {
+      alarm();
+    }
+  #endif
 
   if ((mode == JAMMING || mode == FATAL || mode == REVERSING)) {
     if (switch_pos != STOP) {
