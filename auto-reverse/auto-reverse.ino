@@ -20,6 +20,10 @@
   #include "proximity.h"
 #endif
 
+#ifdef HAS_STATUS
+  #include "status.h"
+#endif
+
 
 unsigned long logTS = 0;      // TS to dump debug messages every 5 secs
 
@@ -66,6 +70,10 @@ void setup() {
     hall_setup();
   #endif
 
+  #ifdef STATUS
+    status_setup();
+  #endif
+
 }
 
 void onFatal() {
@@ -74,6 +82,9 @@ void onFatal() {
     alarm();
   #endif
 
+  #ifdef HAS_STATUS
+    setStatus(true);
+  #endif
 }
 
 void loop() {
@@ -83,6 +94,10 @@ void loop() {
 
   #ifdef HAS_HALL
     hall_loop();
+  #endif
+  
+  #ifdef HAS_STATUS
+    setStatus(false);
   #endif
 
 
@@ -104,7 +119,6 @@ void loop() {
       Serial.println(data);
     }
   }
-
 
 
   if (switch_pos == FORWARD) {

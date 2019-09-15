@@ -1,14 +1,14 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#define FWD_PIN A2              // VFD FWD Pin
-#define REV_PIN A3              // VFD REV Pin
+#define FWD_PIN A5              // VFD FWD Pin
+#define REV_PIN A4              // VFD REV Pin
 
 #define RELAY_ON 0              // The relay bank's on value (eg: normally closed) 
 #define RELAY_OFF 255           // The relay bank's off value (eg: normally closed) 
 
-#define DIR_SWITCH_UP_PIN 3         // The 3 position's up output (digital in)
-#define DIR_SWITCH_DOWN_PIN 4       // The 3 position's down output (digital in)
+#define DIR_SWITCH_UP_PIN 1         // The 3 position's up output (digital in)
+#define DIR_SWITCH_DOWN_PIN 2       // The 3 position's down output (digital in)
 
 #define STARTING_TIMEOUT 2000   // Threshold, time needed to startup motor
 #define REVERSING_TIMEOUT 2000  // Threshold, time needed to reverse motor
@@ -22,9 +22,16 @@
 //    Optional : you need to activate at least one sensor, HALL or/and PROXIMITY
 //
 
+
+// Status - uncomment to activate
+#define HAS_STATUS
+#define STATUS_OK A3
+#define STATUS_ERROR A2
+
+
 // Proximity sensor - uncomment to activate
-#define HAS_PROXIMITY
-#define PROXIMITY_PIN 7       // Proximity Sensor Pin (usually the black)
+// #define HAS_PROXIMITY
+#define PROXIMITY_PIN 9       // Proximity Sensor Pin (usually the black)
 #define PROXIMITY_TIMEOUT 3000  // Max. delta time between the sensor's on/off. This is used to recognize a jamming.
 
 
