@@ -1,45 +1,19 @@
 #ifndef AUTO_REVERSE_H
 #define AUTO_REVERSE_H
 
-#ifdef HAS_TEMPERTURE
-#include "temperature.h"
-#endif
-
-#ifdef ALARM_SOUND
-#include "alarm.h"
-#endif
-
-#ifdef HAS_HALL
-#include "hall.h"
-#endif
-
-#ifdef HAS_PROXIMITY
-#include "proximity.h"
-#endif
-
-#ifdef HAS_STATUS
-#include "status.h"
-#endif
+#include "features.h"
 
 #ifdef HAS_RESET
-#include "reset.h"
-#endif
-
-#ifdef HAS_IR
-#include "ir.h"
-#endif
-
-#ifdef HAS_RESET
-void resetSys() { stop(); }
+	void resetSys() { stop(); }
 #endif
 
 void onFatal() {
 	#ifdef ALARM_SOUND
-	alarm();
+		alarm();
 	#endif
 
 	#ifdef HAS_STATUS
-	setStatus(true);
+		setStatus(true);
 	#endif
 }
 
@@ -54,7 +28,7 @@ bool isShredding() {
 	#endif
 
 	#ifdef HAS_HALL
-	ret = hallOk();
+		ret = hallOk();
 	#endif
 
 	return ret;
@@ -67,15 +41,15 @@ void auto_reverse_setup() {
 void auto_reverse_loop() {
 	
 	#ifdef HAS_PROXIMITY
-	proximity_loop();
+		proximity_loop();
 	#endif
 
 	#ifdef HAS_HALL
-	hall_loop();
+		hall_loop();
 	#endif
 
 	#ifdef HAS_IR
-	ir_loop();
+		ir_loop();
 	#endif
 
 
@@ -89,21 +63,21 @@ void auto_reverse_loop() {
 	}
 
 	#ifdef HAS_RESET
-	reset_loop();
-	if (isReset) {
-		resetSys();
-		delay(1000);
-		return;
-	}
+		reset_loop();
+		if (isReset) {
+			resetSys();
+			delay(1000);
+			return;
+		}
 	#endif
 
 	#ifdef HAS_TEMPERTURE
-	temperature_loop();
-	if (!temperatureOk()) {
-		mode = FATAL;
-		onFatal();
-		return;
-	}
+		temperature_loop();
+		if (!temperatureOk()) {
+			mode = FATAL;
+			onFatal();
+			return;
+		}
 	#endif
 
 	if (switch_pos == FORWARD) {
@@ -132,7 +106,7 @@ void auto_reverse_loop() {
 				mode = JAMMING;
 				stop();
 				#ifdef HAS_PROXIMTY
-				proximity_reset();
+					proximity_reset();
 				#endif
 				return;
 			}
@@ -147,7 +121,7 @@ void auto_reverse_loop() {
 				stop();
 
 				#ifdef HAS_PROXIMTY
-				moving = false;
+					moving = false;
 				#endif
 
 				onFatal();
@@ -168,7 +142,7 @@ void auto_reverse_loop() {
 				mode = STARTING;
 
 				#ifdef HAS_PROXIMTY
-				moving = false;
+					moving = false;
 				#endif
 			}
 		}
@@ -190,14 +164,14 @@ void auto_reverse_loop() {
 		case FORWARD: {
 				fwd(true);
 				#ifdef HAS_STATUS
-				setStatus(false);
+					setStatus(false);
 				#endif
 				break;
 			}
 		case REVERSE: {
 				rev(true);
 				#ifdef HAS_STATUS
-				setStatus(false);
+					setStatus(false);
 				#endif
 				break;
 			}
@@ -207,7 +181,7 @@ void auto_reverse_loop() {
 				jamming = 0;
 				last_switch = STOP;
 				#ifdef HAS_STATUS
-				setStatus(true);
+					setStatus(true);
 				#endif
 				break;
 			}

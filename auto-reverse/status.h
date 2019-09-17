@@ -13,5 +13,4 @@ void setStatus(bool error) {
   }
 }
 
-
 #endif

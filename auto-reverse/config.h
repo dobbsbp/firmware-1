@@ -20,7 +20,7 @@
 #define HAS_AUTO_REVERSE true               // Set true to enable auto-reverse, false to wire the 3-pos switch directly to the VFD FWD/REV inputs. 
 #define ENABLE_AUTO_REVERSE_PIN 8           // The pin to disable/enable auto-reverse
 
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 //    Optional : you need to activate at least one sensor, HALL or/and IR and/or PROXIMITY
 //
@@ -52,8 +52,8 @@
 #define TEMPERTURE_CS_PIN 6
 #define TEMPERTURE_SO_PIN 7
 
-#define TEMPERTURE_INTERVAL 1000          // Senor read interval, MAX6675 wants it over 1000
-#define TEMPERTURE_MAX 60                 // Max. motor temperature, in C
+#define TEMPERTURE_INTERVAL 1000            // Senor read interval, MAX6675 wants it over 1000
+#define TEMPERTURE_MAX 60                   // Max. motor temperature, in C
 
 // Alarm sound - uncomment to activate
 // #define ALARM_SOUND

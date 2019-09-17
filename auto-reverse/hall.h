@@ -5,7 +5,6 @@ int minCurrent = 0;     //this is the current value that the machine uses to rec
 int hall_value = 0;
 unsigned long hall_TS = 0;
 
-
 void hall_reset();
 
 void hall_setup() {
@@ -28,7 +27,5 @@ void hall_reset() {
 bool hallOk() {
   return hall_value <= MAX_AMPS;
 }
-
-
 
 #endif

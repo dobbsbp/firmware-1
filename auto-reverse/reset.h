@@ -8,6 +8,4 @@ void reset_loop() {
   isReset = digitalRead(RESET_PIN);
 }
 
-
-
 #endif

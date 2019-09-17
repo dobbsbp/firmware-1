@@ -1,3 +1,6 @@
+#ifndef VFD_H
+#define VFD_H
+
 #include "config.h"
 #include "enums.h"
 
@@ -49,3 +52,4 @@ void stop()
   fwd(false);
   vfd_dir = DIRECTION::STOP;
 }
+#endif

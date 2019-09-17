@@ -5,14 +5,13 @@
 	@link : http://androminarobot-english.blogspot.com/2017/03/encoder-and-arduinotutorial-about-ir.html
 */
 
-
 unsigned int rpm = 0;									// RPM
 float velocity = 0;										// Speed [Km/h]
 volatile byte pulses = 0;								// Pulses per secs
 unsigned long timeold = 0;
 unsigned int pulsesperturn = 20;						// Number of notches the encoder disc has
-const int wheel_diameter = 64;						// diameter [mm]
-static volatile unsigned long debounce = 0;		//
+const int wheel_diameter = 64;						    // diameter [mm]
+static volatile unsigned long debounce = 0;		        // poor man's debouncer
 
 void ir_count() {
 	if (digitalRead(IR_PIN) && (micros() - debounce > 500) && digitalRead(IR_PIN)) {
@@ -40,7 +39,6 @@ void ir_loop() {
 		interrupts(); // Restart the interrupt processing // Reiniciamos la interrupción
 	}
 }
-
 
 #endif
 

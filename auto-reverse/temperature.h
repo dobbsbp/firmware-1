@@ -2,8 +2,8 @@
 #define TEMPERATURE_H
 
 #ifdef HAS_TEMPERTURE
-#include <max6675.h>
-
+ #include <max6675.h>
+#endif
 MAX6675 ktc(TEMPERTURE_SCK_PIN, TEMPERTURE_CS_PIN, TEMPERTURE_SO_PIN);
 
 int temperature = 0;
@@ -20,8 +20,4 @@ void temperature_loop() {
 bool temperatureOk() {
   return temperature < TEMPERTURE_MAX;
 }
-
-#endif
-
-
 #endif
