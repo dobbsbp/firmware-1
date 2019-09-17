@@ -34,13 +34,13 @@ void setup() {
 
 void loop() {
 
+  switch_loop();
+  
   if(HAS_AUTO_REVERSE){
     auto_reverse_loop();
     return;
   }
 
-  switch_loop();
-  
   #ifdef HAS_TEMPERTURE
     temperature_loop();
     if (!temperatureOk()) {

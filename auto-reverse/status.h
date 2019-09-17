@@ -1,17 +1,15 @@
 #ifndef STATUS_H
 #define STATUS_H
 
-void status_setup() {
-  pinMode(STATUS_OK, OUTPUT);
-}
+void status_setup() { }
 
 void setStatus(bool error) {
   if (error) {
-    analogWrite(STATUS_ERROR, RELAY_ON);
-    analogWrite(STATUS_OK, RELAY_OFF);
+    analogWrite(STATUS_ERROR_PIN, RELAY_ON);
+    analogWrite(STATUS_OK_PIN, RELAY_OFF);
   } else {
-    analogWrite(STATUS_OK, RELAY_ON);
-    analogWrite(STATUS_ERROR, RELAY_OFF);
+    analogWrite(STATUS_OK_PIN, RELAY_ON);
+    analogWrite(STATUS_ERROR_PIN, RELAY_OFF);
   }
 }
 

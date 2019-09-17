@@ -30,9 +30,8 @@
 
 // Status LEDS (ok, error) - uncomment to activate
 #define HAS_STATUS
-#define STATUS_OK A3
-#define STATUS_ERROR A2
-
+#define STATUS_OK_PIN A3
+#define STATUS_ERROR_PIN A2
 
 // Proximity sensor - uncomment to activate
 // #define HAS_PROXIMITY
@@ -40,7 +39,7 @@
 #define PROXIMITY_TIMEOUT 3000  // Max. delta time between the sensor's on/off. This is used to recognize a jamming.
 
 
-// Temperature sensor - uncomment to activate
+// Motor temperature sensor - uncomment to activate. If the TEMPERTURE_MAX has been exceeded, it will stop the motor and goes into fatal mode. 
 #define HAS_TEMPERTURE
 #define TEMPERTURE_SCK_PIN 5
 #define TEMPERTURE_CS_PIN 6

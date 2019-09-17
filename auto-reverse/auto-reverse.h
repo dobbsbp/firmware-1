@@ -64,8 +64,6 @@ bool isShredding() {
 
 void auto_reverse_loop() {
 
-  switch_loop();
-
   #ifdef HAS_PROXIMITY
     proximity_loop();
   #endif
