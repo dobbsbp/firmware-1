@@ -7,8 +7,8 @@
 #define RELAY_ON 0                          // The relay bank's on value (eg: normally closed) 
 #define RELAY_OFF 255                       // The relay bank's off value (eg: normally closed) 
 
-#define DIR_SWITCH_UP_PIN 1					// The 3 position's up output (digital in)
-#define DIR_SWITCH_DOWN_PIN 2				// The 3 position's down output (digital in)
+#define DIR_SWITCH_UP_PIN 1                 // The 3 position's up output (digital in)
+#define DIR_SWITCH_DOWN_PIN 2               // The 3 position's down output (digital in)
 
 #define STARTING_TIMEOUT 2000               // Threshold, time needed to startup motor
 #define REVERSING_TIMEOUT 2000              // Threshold, time needed to reverse motor
