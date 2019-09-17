@@ -89,7 +89,7 @@ void auto_reverse_loop() {
       return;
     }
   #endif
-  
+
   if (switch_pos == FORWARD) {
     if (last_switch == STOP) {
       if (!isShredding() && mode == HALT) {
@@ -149,9 +149,9 @@ void auto_reverse_loop() {
         startTS = millis();
         mode = STARTING;
 
-      #ifdef HAS_PROXIMTY
-        moving = false;
-      #endif
+        #ifdef HAS_PROXIMTY
+          moving = false;
+        #endif
 
       }
     }
