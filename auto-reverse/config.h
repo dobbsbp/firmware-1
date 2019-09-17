@@ -17,6 +17,8 @@
 #define DEBUG true
 #define DEBUG_INTERVAL 2000
 
+#define HAS_AUTO_REVERSE true
+
 ////////////////////////////////////////////////////////////////////////////////
 //
 //    Optional : you need to activate at least one sensor, HALL or/and PROXIMITY
