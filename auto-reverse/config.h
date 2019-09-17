@@ -1,8 +1,8 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#define FWD_PIN A5									// VFD FWD Pin
-#define REV_PIN A4									// VFD REV Pin
+#define FWD_PIN A5                                 // VFD FWD Pin
+#define REV_PIN A4                                  // VFD REV Pin
 
 #define RELAY_ON 0									// The relay bank's on value (eg: normally closed) 
 #define RELAY_OFF 255								// The relay bank's off value (eg: normally closed) 
@@ -52,8 +52,8 @@
 #define TEMPERTURE_CS_PIN 6
 #define TEMPERTURE_SO_PIN 7
 
-#define TEMPERTURE_INTERVAL 1000			// Senor read interval, MAX6675 wants it over 1000
-#define TEMPERTURE_MAX 60						// Max. motor temperature, in C
+#define TEMPERTURE_INTERVAL 1000          // Senor read interval, MAX6675 wants it over 1000
+#define TEMPERTURE_MAX 60                    // Max. motor temperature, in C
 
 // Alarm sound - uncomment to activate
 // #define ALARM_SOUND

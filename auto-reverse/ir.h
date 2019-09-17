@@ -22,9 +22,8 @@ void ir_count() {
 	}
 }
 
-
 void ir_setup() {
-	pinMode(IR_PIN, INPUT); // Pin 2 configuration
+	pinMode(IR_PIN, INPUT);
 	attachInterrupt(0, ir_count, RISING); // Configuration of interrupt 0, where it is connected. 
 	pulses = 0;
 	rpm = 0;
