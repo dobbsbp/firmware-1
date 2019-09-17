@@ -24,6 +24,10 @@
   #include "status.h"
 #endif
 
+#ifdef HAS_RESET
+  #include "reset.h"
+#endif
+
 
 unsigned long logTS = 0;      // TS to dump debug messages every 5 secs
 
@@ -52,6 +56,11 @@ bool isShredding() {
   return ret;
 }
 
+#ifdef HAS_RESET
+  void resetSys(){  
+    stop();
+  }
+#endif
 
 void setup() {
   if (DEBUG) {
@@ -72,6 +81,10 @@ void setup() {
 
   #ifdef STATUS
     status_setup();
+  #endif
+
+  #ifdef HAS_RESET
+    reset_setup();
   #endif
 
 }
@@ -100,6 +113,14 @@ void loop() {
     setStatus(false);
   #endif
 
+  #ifdef HAS_RESET
+    reset_loop();
+    if(isReset){
+      resetSys();
+      delay(1000);
+      return;
+    }
+  #endif
 
   #ifdef HAS_TEMPERTURE
     temperature_loop();
@@ -120,6 +141,7 @@ void loop() {
     }
   }
 
+  
 
   if (switch_pos == FORWARD) {
 
