@@ -40,7 +40,7 @@
 #define PROXIMITY_TIMEOUT 3000				// Max. delta time between the sensor's on/off. This is used to recognize a jamming.
 
 // IR sensor ( LM393 ) - uncomment to activate
-#define HAS_IR
+// #define HAS_IR
 #define IR_PIN 2
 #define IR_INTERVAL 1000
 
