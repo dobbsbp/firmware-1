@@ -17,8 +17,8 @@
 #define DEBUG true
 #define DEBUG_INTERVAL 2000
 
-#define HAS_AUTO_REVERSE true				// Set true to enable auto-reverse, false to wire the 3-pos switch directly to the VFD FWD/REV inputs. 
-#define ENABLE_AUTO_REVERSE_PIN 8			// The pin to disable/enable auto-reverse
+#define HAS_AUTO_REVERSE true               // Set true to enable auto-reverse, false to wire the 3-pos switch directly to the VFD FWD/REV inputs. 
+#define ENABLE_AUTO_REVERSE_PIN 8        // The pin to disable/enable auto-reverse
 
 ////////////////////////////////////////////////////////////////////////////////
 //
@@ -27,13 +27,13 @@
 
 // Proximity sensor - uncomment to activate
 #define HAS_PROXIMITY
-#define PROXIMITY_PIN 9							// Proximity Sensor Pin (usually the black)
-#define PROXIMITY_TIMEOUT 3000				// Max. delta time between the sensor's on/off. This is used to recognize a jamming.
+#define PROXIMITY_PIN 9                         // Proximity Sensor Pin (usually the black)
+#define PROXIMITY_TIMEOUT 3000            // Max. delta time between the sensor's on/off. This is used to recognize a jamming.
 
 // IR sensor ( LM393 ) - uncomment to activate
 // #define HAS_IR
-#define IR_PIN 2										// Arduino has fixed pins for using interrupts, don't change this 
-#define IR_INTERVAL 1000							// re-compute values in this interval
+#define IR_PIN 2                                     // Arduino has fixed pins for using interrupts, don't change this 
+#define IR_INTERVAL 1000                        // re-compute values in this interval
 
 
 // Reset button - uncomment to activate
@@ -62,8 +62,8 @@
 
 // Hall Sensor (Experimental)- uncomment to activate
 // #define HAS_HALL
-#define HALL_INTERVAL 500						// hall sensor read interval
-#define HALL_PIN A0									// this pin has a hall sensor connected to it that measures the output current to the motor
-#define MAX_AMPS 650								// this is the value over which the hall sensor signal will register as a jam
+#define HALL_INTERVAL 500                      // hall sensor read interval
+#define HALL_PIN A0                                // this pin has a hall sensor connected to it that measures the output current to the motor
+#define MAX_AMPS 650                            // this is the value over which the hall sensor signal will register as a jam
 
 #endif
