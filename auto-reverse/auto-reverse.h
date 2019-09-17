@@ -72,10 +72,6 @@ void auto_reverse_loop() {
     hall_loop();
   #endif
   
-  #ifdef HAS_STATUS
-    setStatus(false);
-  #endif
-
   #ifdef HAS_RESET
     reset_loop();
     if(isReset){
@@ -176,10 +172,16 @@ void auto_reverse_loop() {
   switch (switch_pos) {
     case FORWARD: {
         fwd(true);
+        #ifdef HAS_STATUS
+          setStatus(false);
+        #endif
         break;
       }
     case REVERSE: {
         rev(true);
+        #ifdef HAS_STATUS
+          setStatus(false);
+        #endif
         break;
       }
     case STOP: {
@@ -187,6 +189,9 @@ void auto_reverse_loop() {
         mode = HALT;
         jamming = 0;
         last_switch = STOP;
+        #ifdef HAS_STATUS
+          setStatus(true);
+        #endif
         break;
       }
   }

@@ -17,7 +17,7 @@
 #define DEBUG true
 #define DEBUG_INTERVAL 2000
 
-#define HAS_AUTO_REVERSE false  // Set true to enable auto-reverse, false to wire the 3-pos switch directly to the VFD FWD/REV inputs. 
+#define HAS_AUTO_REVERSE true  // Set true to enable auto-reverse, false to wire the 3-pos switch directly to the VFD FWD/REV inputs. 
 
 ////////////////////////////////////////////////////////////////////////////////
 //
