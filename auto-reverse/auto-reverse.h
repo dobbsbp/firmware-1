@@ -25,6 +25,10 @@
 #include "reset.h"
 #endif
 
+#ifdef HAS_IR
+#include "ir.h"
+#endif
+
 #ifdef HAS_RESET
 void resetSys() { stop(); }
 #endif
@@ -61,6 +65,7 @@ void auto_reverse_setup() {
 }
 
 void auto_reverse_loop() {
+	
 	#ifdef HAS_PROXIMITY
 	proximity_loop();
 	#endif
@@ -68,6 +73,16 @@ void auto_reverse_loop() {
 	#ifdef HAS_HALL
 	hall_loop();
 	#endif
+
+
+	if (DEBUG) {
+		if (millis() - logTS > DEBUG_INTERVAL) {
+			logTS = millis();
+			char data[124];
+			sprintf(data, "DEBUG 3POS : %d || MOVING : %d || VFD : %d || last dir switch : %d | mode = %d | sensor = %lu | jamming=%d", switch_pos, moving, vfd_dir, last_switch, mode, SENSOR_DT, jamming);
+			Serial.println(data);
+		}
+	}
 
 	#ifdef HAS_RESET
 	reset_loop();

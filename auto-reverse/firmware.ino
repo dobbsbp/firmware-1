@@ -30,10 +30,15 @@ void setup() {
 	reset_setup();
 	#endif
 
+	#ifdef HAS_IR
+	ir_setup();
+	#endif
+
 	if (HAS_AUTO_REVERSE) {
 		auto_reverse_setup();
-		return;
 	}
+
+
 }
 
 void loop() {

@@ -36,9 +36,13 @@
 
 // Proximity sensor - uncomment to activate
 #define HAS_PROXIMITY
-#define PROXIMITY_PIN 9       // Proximity Sensor Pin (usually the black)
-#define PROXIMITY_TIMEOUT 3000  // Max. delta time between the sensor's on/off. This is used to recognize a jamming.
+#define PROXIMITY_PIN 9							// Proximity Sensor Pin (usually the black)
+#define PROXIMITY_TIMEOUT 3000				// Max. delta time between the sensor's on/off. This is used to recognize a jamming.
 
+// IR sensor ( LM393 ) - uncomment to activate
+#define HAS_IR
+#define IR_PIN 9       
+#define PROXIMITY_TIMEOUT 3000
 
 // Motor temperature sensor - uncomment to activate. If the TEMPERTURE_MAX has been exceeded, it will stop the motor and goes into fatal mode. 
 #define HAS_TEMPERTURE
