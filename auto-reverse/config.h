@@ -17,7 +17,7 @@
 #define DEBUG true
 #define DEBUG_INTERVAL 2000
 
-#define HAS_AUTO_REVERSE true
+#define HAS_AUTO_REVERSE false  // Set true to enable auto-reverse, false to wire the 3-pos switch directly to the VFD FWD/REV inputs. 
 
 ////////////////////////////////////////////////////////////////////////////////
 //
@@ -29,7 +29,7 @@
 #define RESET_PIN 3
 
 // Status LEDS (ok, error) - uncomment to activate
-// #define HAS_STATUS
+#define HAS_STATUS
 #define STATUS_OK A3
 #define STATUS_ERROR A2
 

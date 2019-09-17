@@ -5,7 +5,6 @@
 #include "switch.h"
 #include "auto-reverse.h"
 
-
 void setup() {
   if (DEBUG) {
     Serial.begin(19200);
@@ -42,15 +41,20 @@ void loop() {
 
   switch_loop();
   
-  #ifdef HAS_STATUS
-    setStatus(false);
-  #endif
-
   #ifdef HAS_TEMPERTURE
     temperature_loop();
     if (!temperatureOk()) {
       mode = FATAL;
       onFatal();
+      return;
+    }
+  #endif
+
+  #ifdef HAS_RESET
+    reset_loop();
+    if(isReset){
+      resetSys();
+      delay(1000);
       return;
     }
   #endif
@@ -68,16 +72,25 @@ void loop() {
   switch (switch_pos) {
     case FORWARD: {
         fwd(true);
+        #ifdef HAS_STATUS
+          setStatus(false);
+        #endif
         break;
       }
     case REVERSE: {
         rev(true);
+        #ifdef HAS_STATUS
+          setStatus(false);
+        #endif
         break;
       }
     case STOP: {
         stop();
         mode = HALT;
         last_switch = STOP;
+        #ifdef HAS_STATUS
+          setStatus(true);
+        #endif
         break;
       }
   }
