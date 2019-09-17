@@ -6,17 +6,17 @@
 */
 
 
-unsigned int rpm = 0;									// Revoluciones por minuto calculadas.
+unsigned int rpm = 0;									// RPM
 float velocity = 0;										// Speed [Km/h]
 volatile byte pulses = 0;								// Pulses per secs
-unsigned long timeold = 0;							
-unsigned int pulsesperturn = 20;						// Number of notches the encoder disc has.
+unsigned long timeold = 0;
+unsigned int pulsesperturn = 20;						// Number of notches the encoder disc has
 const int wheel_diameter = 64;						// diameter [mm]
-static volatile unsigned long debounce = 0;		// Tiempo del rebote.
+static volatile unsigned long debounce = 0;		//
 
 void ir_count() {
 	if (digitalRead(IR_PIN) && (micros() - debounce > 500) && digitalRead(IR_PIN)) {
-	// Check again that the encoder sends a good signal and then check that the time is greater than 1000 microseconds and check again that the signal is correct.
+		// Check again that the encoder sends a good signal and then check that the time is greater than 1000 microseconds and check again that the signal is correct.
 		debounce = micros(); // Store the time to verify that we do not count the rebound in the signal.
 		pulses++;
 	}
@@ -32,7 +32,7 @@ void ir_setup() {
 }
 
 void ir_loop() {
-	if (millis() - timeold >= IR_INTERVAL) {// Updates every second
+	if (millis() - timeold >= IR_INTERVAL) {
 		noInterrupts(); // Don't process interrupts during calculations // We disconnect the interrupt so it doesn't act in this part of the program.
 		rpm = (60 * 1000 / pulsesperturn) / (millis() - timeold) * pulses; // Calculate the revolutions per minute
 		velocity = rpm * 3.1416 * wheel_diameter * 60 / 1000000; // Speed ​​calculation in [Km / h] 
