@@ -10,9 +10,9 @@
 #define DIR_SWITCH_UP_PIN 1					// The 3 position's up output (digital in)
 #define DIR_SWITCH_DOWN_PIN 2				// The 3 position's down output (digital in)
 
-#define STARTING_TIMEOUT 2000				// Threshold, time needed to startup motor
-#define REVERSING_TIMEOUT 2000				// Threshold, time needed to reverse motor
-#define MAX_REVERSE_TRIALS 2					// Max. trials to reverse before aborting
+#define STARTING_TIMEOUT 2000               // Threshold, time needed to startup motor
+#define REVERSING_TIMEOUT 2000             // Threshold, time needed to reverse motor
+#define MAX_REVERSE_TRIALS 2                // Max. trials to reverse before aborting
 
 #define DEBUG true
 #define DEBUG_INTERVAL 2000
