@@ -74,6 +74,10 @@ void auto_reverse_loop() {
 	hall_loop();
 	#endif
 
+	#ifdef HAS_IR
+	ir_loop();
+	#endif
+
 
 	if (DEBUG) {
 		if (millis() - logTS > DEBUG_INTERVAL) {

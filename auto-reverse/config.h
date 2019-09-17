@@ -41,8 +41,9 @@
 
 // IR sensor ( LM393 ) - uncomment to activate
 #define HAS_IR
-#define IR_PIN 9       
-#define PROXIMITY_TIMEOUT 3000
+#define IR_PIN 2
+#define IR_INTERVAL 1000
+
 
 // Motor temperature sensor - uncomment to activate. If the TEMPERTURE_MAX has been exceeded, it will stop the motor and goes into fatal mode. 
 #define HAS_TEMPERTURE
