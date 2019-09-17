@@ -1,11 +1,8 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#define FWD_PIN A5                          // VFD FWD Pin
-#define REV_PIN A4                          // VFD REV Pin
-#define VFD_ERROR_PIN 13                    // Some VFDs have an error signal. Consume this to set FATAL state - Not impl.
-#define VFD_RESET_PIN 12                    // Some VFDs have an reset signal. Consume this in case we have a reset button - Not impl.
-
+#define FWD_PIN A5                          // VFD FWD Pin. This goes into the relay.
+#define REV_PIN A4                          // VFD REV Pin. This goes into the relay.
 
 #define RELAY_ON 0                          // The relay bank's on value (eg: normally closed) 
 #define RELAY_OFF 255                       // The relay bank's off value (eg: normally closed) 
@@ -29,7 +26,7 @@
 //
 
 // Proximity sensor - uncomment to activate
-#define HAS_PROXIMITY
+// #define HAS_PROXIMITY
 #define PROXIMITY_PIN 9                     // Proximity Sensor Pin (usually the black)
 #define PROXIMITY_TIMEOUT 3000              // Max. delta time between the sensor's on/off. This is used to recognize a jamming.
 
@@ -45,9 +42,13 @@
 
 // Status LEDS (ok, error) - uncomment to activate
 #define HAS_STATUS
-#define STATUS_OK_PIN A3
-#define STATUS_ERROR_PIN A2
+#define STATUS_OK_PIN A3                    // This goes into the relay
+#define STATUS_ERROR_PIN A2                 // This goes into the relay
 
+// Some VFDs have an error signal. Consume this to set FATAL state - Not impl.  - uncomment to activate
+#define VFD_ERROR_PIN 13
+// VFDs have an reset signal. Consume this in case we have a reset button - Not impl.  - uncomment to activate
+#define VFD_RESET_PIN 12
 
 // Motor temperature sensor - uncomment to activate. If the TEMPERTURE_MAX has been exceeded, it will stop the motor and goes into fatal mode. 
 #define HAS_TEMPERTURE
