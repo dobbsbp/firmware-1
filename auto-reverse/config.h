@@ -7,12 +7,12 @@
 #define RELAY_ON 0                          // The relay bank's on value (eg: normally closed) 
 #define RELAY_OFF 255                       // The relay bank's off value (eg: normally closed) 
 
-#define DIR_SWITCH_UP_PIN 1                 // The 3 position's up output (digital in)
-#define DIR_SWITCH_DOWN_PIN 2               // The 3 position's down output (digital in)
+#define DIR_SWITCH_UP_PIN 1                 // The 3 position's up output
+#define DIR_SWITCH_DOWN_PIN 2               // The 3 position's down output
 
 #define STARTING_TIMEOUT 2000               // Threshold, time needed to startup motor
 #define REVERSING_TIMEOUT 2000              // Threshold, time needed to reverse motor
-#define MAX_REVERSE_TRIALS 2                // Max. trials to reverse before aborting
+#define MAX_REVERSE_TRIALS 2                // Max. trials to reverse before aborting (goes in FATAL state, unlock via 3pos switch = 0 or reset button)
 
 #define DEBUG true
 #define DEBUG_INTERVAL 2000
@@ -53,7 +53,7 @@
 #define TEMPERTURE_SO_PIN 7
 
 #define TEMPERTURE_INTERVAL 1000            // Senor read interval, MAX6675 wants it over 1000
-#define TEMPERTURE_MAX 60                   // Max. motor temperature, in C
+#define TEMPERTURE_MAX 50                   // Max. motor temperature, in C
 
 // Alarm sound - uncomment to activate
 // #define ALARM_SOUND
