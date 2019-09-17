@@ -1,8 +1,8 @@
 void setup() {
   // put your setup code here, to run once:
-  pinMode(A4, OUTPUT);
-  pinMode(A3, OUTPUT);
-
+  // pinMode(A4, OUTPUT);
+  pinMode(3, INPUT_PULLUP);
+  Serial.begin(19200);
 }
 
 void loop() {
@@ -10,6 +10,6 @@ void loop() {
   // digitalWrite(13, LOW);
   // digitalWrite(12, LOW);
   // analogWrite(A5, 0);
-  analogWrite(A3, 255);
+  Serial.println(digitalRead(3));
   delay(200);
 }

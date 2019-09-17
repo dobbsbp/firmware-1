@@ -14,7 +14,7 @@
 #define REVERSING_TIMEOUT 2000  // Threshold, time needed to reverse motor
 #define MAX_REVERSE_TRIALS 2    // Max. trials to reverse before aborting
 
-#define DEBUG false
+#define DEBUG true
 #define DEBUG_INTERVAL 2000
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -22,9 +22,12 @@
 //    Optional : you need to activate at least one sensor, HALL or/and PROXIMITY
 //
 
+// Reset button - uncomment to activate
+#define HAS_RESET
+#define RESET_PIN 3
 
-// Status - uncomment to activate
-#define HAS_STATUS
+// Status LEDS (ok, error) - uncomment to activate
+// #define HAS_STATUS
 #define STATUS_OK A3
 #define STATUS_ERROR A2
 
@@ -36,10 +39,10 @@
 
 
 // Temperature sensor - uncomment to activate
-// #define HAS_TEMPERTURE
-#define TEMPERTURE_SCK_PIN 10
-#define TEMPERTURE_CS_PIN 9
-#define TEMPERTURE_SO_PIN 8
+#define HAS_TEMPERTURE
+#define TEMPERTURE_SCK_PIN 5
+#define TEMPERTURE_CS_PIN 6
+#define TEMPERTURE_SO_PIN 7
 
 #define TEMPERTURE_INTERVAL 1000    // Senor read interval, MAX6675 wants it over 1000
 #define TEMPERTURE_MAX 60           // Max. motor temperature, in C
