@@ -149,9 +149,9 @@ void auto_reverse_loop() {
 	}
 
 	#ifdef ALARM_SOUND
-	if (mode == FATAL) {
-		alarm();
-	}
+		if (mode == FATAL) {
+			alarm();
+		}
 	#endif
 
 	if ((mode == JAMMING || mode == FATAL || mode == REVERSING)) {
@@ -162,29 +162,29 @@ void auto_reverse_loop() {
 
 	switch (switch_pos) {
 		case FORWARD: {
-				fwd(true);
-				#ifdef HAS_STATUS
-					setStatus(false);
-				#endif
-				break;
-			}
+			fwd(true);
+			#ifdef HAS_STATUS
+				setStatus(false);
+			#endif
+			break;
+		}
 		case REVERSE: {
-				rev(true);
-				#ifdef HAS_STATUS
-					setStatus(false);
-				#endif
-				break;
-			}
+			rev(true);
+			#ifdef HAS_STATUS
+				setStatus(false);
+			#endif
+			break;
+		}
 		case STOP: {
-				stop();
-				mode = HALT;
-				jamming = 0;
-				last_switch = STOP;
-				#ifdef HAS_STATUS
-					setStatus(true);
-				#endif
-				break;
-			}
+			stop();
+			mode = HALT;
+			jamming = 0;
+			last_switch = STOP;
+			#ifdef HAS_STATUS
+				setStatus(true);
+			#endif
+			break;
+		}
 	}
 	delay(100);
 }

@@ -36,7 +36,7 @@
 #define IR_INTERVAL 1000                    // re-compute values in this interval
 
 
-// Reset button - uncomment to activate
+// Reset button - uncomment to activate. This will unlock the fatal state in case of jamming or other problems.
 #define HAS_RESET
 #define RESET_PIN 3
 
