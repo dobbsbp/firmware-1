@@ -3,6 +3,8 @@
 
 #define FWD_PIN A5                          // VFD FWD Pin
 #define REV_PIN A4                          // VFD REV Pin
+#define VFD_ERROR_PIN 13                    // Some VFDs have an error signal. Consume this to set FATAL state - Not impl.
+
 
 #define RELAY_ON 0                          // The relay bank's on value (eg: normally closed) 
 #define RELAY_OFF 255                       // The relay bank's off value (eg: normally closed) 
