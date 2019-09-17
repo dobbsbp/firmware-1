@@ -14,22 +14,26 @@ void setup() {
 	switch_setup();
 	logTS = millis();
 
-#ifdef HAS_PROXIMTY
+	#ifdef HAS_PROXIMTY
 	proximity_setup();
-#endif
+	#endif
 
-#ifdef HAS_HALL
+	#ifdef HAS_HALL
 	hall_setup();
-#endif
+	#endif
 
-#ifdef STATUS
+	#ifdef STATUS
 	status_setup();
-#endif
+	#endif
 
-#ifdef HAS_RESET
+	#ifdef HAS_RESET
 	reset_setup();
-#endif
+	#endif
 
+	if (HAS_AUTO_REVERSE) {
+		auto_reverse_setup();
+		return;
+	}
 }
 
 void loop() {
@@ -41,23 +45,23 @@ void loop() {
 		return;
 	}
 
-#ifdef HAS_TEMPERTURE
+	#ifdef HAS_TEMPERTURE
 	temperature_loop();
 	if (!temperatureOk()) {
 		mode = FATAL;
 		onFatal();
 		return;
 	}
-#endif
+	#endif
 
-#ifdef HAS_RESET
+	#ifdef HAS_RESET
 	reset_loop();
 	if (isReset) {
 		resetSys();
 		delay(1000);
 		return;
 	}
-#endif
+	#endif
 
 
 	if (DEBUG) {
@@ -70,29 +74,29 @@ void loop() {
 	}
 
 	switch (switch_pos) {
-	case FORWARD: {
-		fwd(true);
-#ifdef HAS_STATUS
-		setStatus(false);
-#endif
-		break;
-	}
-	case REVERSE: {
-		rev(true);
-#ifdef HAS_STATUS
-		setStatus(false);
-#endif
-		break;
-	}
-	case STOP: {
-		stop();
-		mode = HALT;
-		last_switch = STOP;
-#ifdef HAS_STATUS
-		setStatus(true);
-#endif
-		break;
-	}
+		case FORWARD: {
+				fwd(true);
+				#ifdef HAS_STATUS
+				setStatus(false);
+				#endif
+				break;
+			}
+		case REVERSE: {
+				rev(true);
+				#ifdef HAS_STATUS
+				setStatus(false);
+				#endif
+				break;
+			}
+		case STOP: {
+				stop();
+				mode = HALT;
+				last_switch = STOP;
+				#ifdef HAS_STATUS
+				setStatus(true);
+				#endif
+				break;
+			}
 	}
 	delay(100);
 }

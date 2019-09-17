@@ -2,199 +2,197 @@
 #define AUTO_REVERSE_H
 
 #ifdef HAS_TEMPERTURE
-    #include "temperature.h"
+#include "temperature.h"
 #endif
 
 #ifdef ALARM_SOUND
-  #include "alarm.h"
+#include "alarm.h"
 #endif
 
 #ifdef HAS_HALL
-  #include "hall.h"
+#include "hall.h"
 #endif
 
 #ifdef HAS_PROXIMITY
-  #include "proximity.h"
+#include "proximity.h"
 #endif
 
 #ifdef HAS_STATUS
-  #include "status.h"
+#include "status.h"
 #endif
 
 #ifdef HAS_RESET
-  #include "reset.h"
+#include "reset.h"
 #endif
 
 #ifdef HAS_RESET
-  void resetSys(){  
-    stop();
-  }
+void resetSys() { stop(); }
 #endif
 
 void onFatal() {
+	#ifdef ALARM_SOUND
+	alarm();
+	#endif
 
-  #ifdef ALARM_SOUND
-    alarm();
-  #endif
-
-  #ifdef HAS_STATUS
-    setStatus(true);
-  #endif
+	#ifdef HAS_STATUS
+	setStatus(true);
+	#endif
 }
-
 
 // our main 'is shredding function', utilizing different sensors
 bool isShredding() {
+	bool ret = true;
 
-  bool ret = true;
+	#ifdef HAS_PROXIMITY
+	if (!proximityOk()) {
+		return false;
+	}
+	#endif
 
-  #ifdef HAS_PROXIMITY
-    if (!proximityOk()) {
-      return false;
-    }
-  #endif
-  
-  #ifdef HAS_HALL
-    ret = hallOk();
-  #endif
+	#ifdef HAS_HALL
+	ret = hallOk();
+	#endif
 
-  return ret;
+	return ret;
 }
 
+void auto_reverse_setup() {
+
+}
 
 void auto_reverse_loop() {
+	#ifdef HAS_PROXIMITY
+	proximity_loop();
+	#endif
 
-  #ifdef HAS_PROXIMITY
-    proximity_loop();
-  #endif
+	#ifdef HAS_HALL
+	hall_loop();
+	#endif
 
-  #ifdef HAS_HALL
-    hall_loop();
-  #endif
-  
-  #ifdef HAS_RESET
-    reset_loop();
-    if(isReset){
-      resetSys();
-      delay(1000);
-      return;
-    }
-  #endif
+	#ifdef HAS_RESET
+	reset_loop();
+	if (isReset) {
+		resetSys();
+		delay(1000);
+		return;
+	}
+	#endif
 
-  #ifdef HAS_TEMPERTURE
-    temperature_loop();
-    if (!temperatureOk()) {
-      mode = FATAL;
-      onFatal();
-      return;
-    }
-  #endif
+	#ifdef HAS_TEMPERTURE
+	temperature_loop();
+	if (!temperatureOk()) {
+		mode = FATAL;
+		onFatal();
+		return;
+	}
+	#endif
 
-  if (switch_pos == FORWARD) {
-    if (last_switch == STOP) {
-      if (!isShredding() && mode == HALT) {
-        startTS = millis();
-        mode = STARTING;
-      }
-    }
+	if (switch_pos == FORWARD) {
+		if (last_switch == STOP) {
+			if (!isShredding() && mode == HALT) {
+				startTS = millis();
+				mode = STARTING;
+			}
+		}
 
-    if (mode == STARTING) {
-      if (millis() - startTS > STARTING_TIMEOUT) {
-        if (isShredding()) {
-          mode = SHREDDING;
-        } else {
-          mode = JAMMING;
-          stop();
-          return;
-        }
-      }
-    }
+		if (mode == STARTING) {
+			if (millis() - startTS > STARTING_TIMEOUT) {
+				if (isShredding()) {
+					mode = SHREDDING;
+				}
+				else {
+					mode = JAMMING;
+					stop();
+					return;
+				}
+			}
+		}
 
-    if (mode == SHREDDING) {
-      if (!isShredding()) {
-        mode = JAMMING;
-        stop();
-        #ifdef HAS_PROXIMTY
-          proximity_reset();
-        #endif
-        return;
-      } else {
-        jamming = 0;
-      }
-    }
+		if (mode == SHREDDING) {
+			if (!isShredding()) {
+				mode = JAMMING;
+				stop();
+				#ifdef HAS_PROXIMTY
+				proximity_reset();
+				#endif
+				return;
+			}
+			else {
+				jamming = 0;
+			}
+		}
 
-    if (mode == JAMMING) {
-      if (jamming >= MAX_REVERSE_TRIALS) {
-        mode = FATAL;
-        stop();
-        
-        #ifdef HAS_PROXIMTY
-              moving = false;
-        #endif
-        
-        onFatal();
-        return;
-      }
+		if (mode == JAMMING) {
+			if (jamming >= MAX_REVERSE_TRIALS) {
+				mode = FATAL;
+				stop();
 
-      rev(true);
-      mode = REVERSING;
-      jamming++;
-      reverseTS = millis();
-      return;
-    }
+				#ifdef HAS_PROXIMTY
+				moving = false;
+				#endif
 
-    if (mode == REVERSING) {
-      if (millis() - reverseTS > REVERSING_TIMEOUT) {
-        stop();
-        startTS = millis();
-        mode = STARTING;
+				onFatal();
+				return;
+			}
 
-        #ifdef HAS_PROXIMTY
-          moving = false;
-        #endif
+			rev(true);
+			mode = REVERSING;
+			jamming++;
+			reverseTS = millis();
+			return;
+		}
 
-      }
-    }
-  }
+		if (mode == REVERSING) {
+			if (millis() - reverseTS > REVERSING_TIMEOUT) {
+				stop();
+				startTS = millis();
+				mode = STARTING;
 
-  #ifdef ALARM_SOUND
-    if (mode == FATAL) {
-      alarm();
-    }
-  #endif
+				#ifdef HAS_PROXIMTY
+				moving = false;
+				#endif
+			}
+		}
+	}
 
-  if ((mode == JAMMING || mode == FATAL || mode == REVERSING)) {
-    if (switch_pos != STOP) {
-      return;
-    }
-  }
+	#ifdef ALARM_SOUND
+	if (mode == FATAL) {
+		alarm();
+	}
+	#endif
 
-  switch (switch_pos) {
-    case FORWARD: {
-        fwd(true);
-        #ifdef HAS_STATUS
-          setStatus(false);
-        #endif
-        break;
-      }
-    case REVERSE: {
-        rev(true);
-        #ifdef HAS_STATUS
-          setStatus(false);
-        #endif
-        break;
-      }
-    case STOP: {
-        stop();
-        mode = HALT;
-        jamming = 0;
-        last_switch = STOP;
-        #ifdef HAS_STATUS
-          setStatus(true);
-        #endif
-        break;
-      }
-  }
-  delay(100);
+	if ((mode == JAMMING || mode == FATAL || mode == REVERSING)) {
+		if (switch_pos != STOP) {
+			return;
+		}
+	}
+
+	switch (switch_pos) {
+		case FORWARD: {
+				fwd(true);
+				#ifdef HAS_STATUS
+				setStatus(false);
+				#endif
+				break;
+			}
+		case REVERSE: {
+				rev(true);
+				#ifdef HAS_STATUS
+				setStatus(false);
+				#endif
+				break;
+			}
+		case STOP: {
+				stop();
+				mode = HALT;
+				jamming = 0;
+				last_switch = STOP;
+				#ifdef HAS_STATUS
+				setStatus(true);
+				#endif
+				break;
+			}
+	}
+	delay(100);
 }
 #endif

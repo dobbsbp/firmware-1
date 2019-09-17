@@ -18,6 +18,7 @@
 #define DEBUG_INTERVAL 2000
 
 #define HAS_AUTO_REVERSE true  // Set true to enable auto-reverse, false to wire the 3-pos switch directly to the VFD FWD/REV inputs. 
+#define ENABLE_AUTO_REVERSE_PIN 8 // The pin to disable/enable auto-reverse
 
 ////////////////////////////////////////////////////////////////////////////////
 //
@@ -34,7 +35,7 @@
 #define STATUS_ERROR_PIN A2
 
 // Proximity sensor - uncomment to activate
-// #define HAS_PROXIMITY
+#define HAS_PROXIMITY
 #define PROXIMITY_PIN 9       // Proximity Sensor Pin (usually the black)
 #define PROXIMITY_TIMEOUT 3000  // Max. delta time between the sensor's on/off. This is used to recognize a jamming.
 
